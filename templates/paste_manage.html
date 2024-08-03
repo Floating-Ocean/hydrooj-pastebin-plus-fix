@@ -1,0 +1,42 @@
+{% set page_name = "paste_manage" %}
+{% extends "layout/basic.html" %}
+{% block content %}
+<div class="row">
+  <div class="medium-12 columns">
+    <div class="section">
+      <div class="section__header">
+          <h1 class="section__title">{{ _("paste_manage") }}</h1>
+          <div class="section__tools">
+                <a href="{{ url('paste_create') }}" type="submit" class="rounded primary button">
+                    {{ _('paste_create') }}
+                </a>
+          </div>
+      </div>
+      <div class="section__body">
+          <div class="row" style="padding-top: 40px;padding-bottom: 20px;user-select:none;">
+              <table class="data-table">
+                <tbody>
+                    {%- for pdoc in doc -%}
+                    <tr>
+                        <td style="padding-left:1.125rem;"><a href="{{ url('paste_show', { id: pdoc._id }) }}" style="color:inherit;">{{pdoc.title}}</a></td>
+                        <td>{{pdoc.time}}</td>
+                        <td>
+                            <a href="{{ url('paste_edit', { id: pdoc._id }) }}">编辑</a>&nbsp;&nbsp;
+                            <a href="{{ url('paste_delete', { id: pdoc._id }) }}">删除</a>
+                        </td>
+                    </tr>
+                    {%- endfor -%}
+                </tbody>
+                </table>
+          </div>
+          <br>
+          <div class="row" style="margin-left: 5px; text-align: left;">
+            <input type="hidden" name="csrfToken" value="{{ handler.csrfToken }}">
+            <div style="margin-top:12px;user-select:none;"><font color="gray" size="0.96em">Powered by <a href="//github.com/liyanqwq/hydrooj-pastebin-plus">Hydro Pastebin Plus</a>, <a href="//github.com/Floating-Ocean/hydrooj-pastebin-plus-fix">modified by Floating Ocean</a></font></div>
+          </div>
+        <!--</form>-->
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

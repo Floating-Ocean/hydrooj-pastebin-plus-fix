@@ -1,0 +1,72 @@
+{% set page_name = "paste_edit" %}
+{% extends "layout/basic.html" %}
+{% block content %}
+<div class="row">
+  <div class="medium-9 columns">
+    <div class="section">
+      <div class="section__header">
+          <h1 class="section__title">{{ _("paste_edit") }}</h1>
+      </div>
+      <div class="section__body">
+        <form method="post">
+          <div class="row">
+            <div class="medium-12 columns">
+              <label>
+                {{ _('PasteID') }}
+                <input name="pasteid" value="{{ doc._id }}" class="textbox" readonly>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="medium-10 columns">
+              <label>
+                {{ _('Title') }}
+                <input name="title" placeholder="{{ _('title') }}" value="{{ doc.title }}" class="textbox" autofocus>
+              </label>
+            </div>
+            <div class="medium-2 columns">
+              <label>
+                <br>
+                {% if doc.isprivate == true %}
+                  <label class="checkbox">
+                    <input type="checkbox" name="isprivate" value="on" class="checkbox" checked>私有
+                  </label>
+                {% else %}
+                  <label class="checkbox">
+                    <input type="checkbox" name="isprivate" value="on" class="checkbox">私有
+                  </label>
+                {% endif %}
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="medium-12 columns">
+              <label>
+                {{ _('Content') }} ({{ _('required') }})
+                <textarea name="content" class="textbox" style="height: 500px" data-markdown>{{ doc.content }}</textarea>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column">
+              <input type="hidden" name="csrfToken" value="{{ handler.csrfToken }}">
+              <button type="submit" class="rounded primary button">
+                {{ _('Update') }}
+              </button>
+              <a type="button" class="rounded button" href="{{ url('paste_delete', { id: doc._id }) }}">
+                {{ _('Delete') }}
+              </a>
+              <button type="button" class="rounded button" onclick="window.history.go(-1)">
+                {{ _('Cancel') }}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="medium-3 columns">
+    {% include 'components/md_hint.html' %}
+  </div>
+</div>
+{% endblock %}
