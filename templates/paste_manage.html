@@ -18,11 +18,15 @@
                 <tbody>
                     {%- for pdoc in doc -%}
                     <tr>
-                        <td style="padding-left:1.125rem;"><a href="{{ url('paste_show', { id: pdoc._id }) }}" style="color:inherit;">{{pdoc.title}}</a></td>
+                        {%- if pdoc.title.length == 0 -%}
+                            <td style="padding-left:1.125rem;"><a href="{{ url('paste_show', { id: pdoc._id }) }}" style="color:inherit;">({{ _("No Title") }})</a></td>
+                        {%- else -%}
+                            <td style="padding-left:1.125rem;"><a href="{{ url('paste_show', { id: pdoc._id }) }}" style="color:inherit;">{{pdoc.title}}</a></td>
+                        {%- endif -%}
                         <td>{{pdoc.time}}</td>
                         <td>
-                            <a href="{{ url('paste_edit', { id: pdoc._id }) }}">编辑</a>&nbsp;&nbsp;
-                            <a href="{{ url('paste_delete', { id: pdoc._id }) }}">删除</a>
+                            <a href="{{ url('paste_edit', { id: pdoc._id }) }}">{{ _("Edit") }}</a>&nbsp;&nbsp;
+                            <a href="{{ url('paste_delete', { id: pdoc._id }) }}">{{ _("Delete") }}</a>
                         </td>
                     </tr>
                     {%- endfor -%}
@@ -30,11 +34,12 @@
                 </table>
           </div>
           <br>
-          <div class="row" style="margin-left: 5px; text-align: left;">
-            <input type="hidden" name="csrfToken" value="{{ handler.csrfToken }}">
-            <div style="margin-top:12px;user-select:none;"><font color="gray" size="0.96em">Powered by <a href="//github.com/liyanqwq/hydrooj-pastebin-plus">Hydro Pastebin Plus</a>, <a href="//github.com/Floating-Ocean/hydrooj-pastebin-plus-fix">modified by Floating Ocean</a></font></div>
-          </div>
-        <!--</form>-->
+          <div class="row">
+            <div class="column>
+              <input type="hidden" name="csrfToken" value="{{ handler.csrfToken }}">
+            </div>
+        </div>
+          <div style="margin-top:12px;user-select:none;"><font color="gray" size="0.96em">Powered by <a href="//github.com/liyanqwq/hydrooj-pastebin-plus">Hydro Pastebin Plus</a>, <a href="//github.com/Floating-Ocean/hydrooj-pastebin-plus-fix">modified by Floating Ocean</a></font></div>
       </div>
     </div>
   </div>

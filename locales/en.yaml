@@ -1,3 +1,21 @@
-paste_create: Create a paste
-paste_show: Read a paste
-paste_edit: Edit this paste
+pastebin: pastebin
+paste_create: Create paste
+paste_manage: Paste Manage
+paste_show: Paste Detail
+paste_edit: Paste Edit
+paste_delete: Paste Delete
+Provide pastebin service.: Provide pastebin service.
+Application: Application
+Private: Private
+Content: Content
+Create: Create
+Collapse: Collapse
+Update: Update
+PasteID: PasteID
+Delete: Delete
+Manage: Manage
+Manage my pastes: Manage my pastes
+Click the button below to delete the paste. This action is irreversible, please proceed with caution.: Click the button below to delete the paste. This action is irreversible, please proceed with caution.
+My pastes: My pastes
+No Title: No Title
+Source code of this paste: Source code of this paste

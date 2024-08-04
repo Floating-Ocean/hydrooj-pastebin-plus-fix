@@ -14,16 +14,16 @@
               <label>
                 <input type="hidden" name="pasteid" value="{{ doc._id }}" class="textbox" readonly>
               </label>
-              <div style="padding-top:16px">
-                标题: {{ doc.title }}
-              </div>
-              <div style="padding-top:12px">
-                剪贴板 ID: {{ doc._id }}
-              </div>
+              {%- if doc.title.length == 0 -%}
+                <div style="padding-top:16px">{{ _("No Title") }}</div>
+              {%- else -%}
+                <div style="padding-top:16px">{{ _('Title') }}: {{ doc.title }}</div>
+              {%- endif -%}
+              <div style="padding-top:12px">{{ _('PasteID') }}: {{ doc._id }}</div>
             </div>
           </div>
           <br>
-          <div style="margin:1.6rem 0 1.6rem;">点击下方按钮即可删除剪贴板，操作不可逆，请谨慎操作。</div>
+          <div style="margin:1.6rem 0 1.6rem;">{{ _('Click the button below to delete the paste. This action is irreversible, please proceed with caution.') }}</div>
           <div class="row">
             <div class="column">
               <input type="hidden" name="csrfToken" value="{{ handler.csrfToken }}">

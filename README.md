@@ -10,32 +10,30 @@
 
 2. 更改所有按钮的链接，在点击按钮后不会切换域；
 
-3. 更改布局以及部分按钮的出现位置，使其较为符合 hydro 主站的使用习惯
+3. 更改布局以及部分按钮的出现位置，使其较为符合 hydro 主站的使用习惯；
+
+4. 更改字段为空的处理，以及权限问题抛出的异常
 
 ## 使用说明
 
-1. 进入您的 HydroOJ 安装目录
-
-2. 在 `/packages/ui-default/templates/layout/html5.html` 中 `<head>` 标签结束前位置插入如下代码
+1. 如果您的 hydro 版本较低，请进入您的 HydroOJ 安装目录，在 `/packages/ui-default/templates/layout/html5.html` 中 `<head>` 标签结束前位置插入如下代码
    
    ```html
    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
    ```
-   
-   p.s. 如果不想因为更新 hydro 而导致更改丢失，前两步可以替换为：控制面板 -> 系统设置 -> `ui-default` -> 将上面的代码插入 `footer_extra_html` 中
 
-3. 执行如下命令
+2. 执行如下命令
    
    ```bash
    yarn global add hydrooj-pastebin-plus
    hydrooj addon add hydrooj-pastebin-plus
    ```
 
-4. 进入 hydrooj-pastebin-plus 的安装目录，并使用本仓库的代码替换源代码
+3. 进入 hydrooj-pastebin-plus 的安装目录，并使用本仓库的代码替换源代码
 
-5. 重启您的 HydroOJ
+4. 重启您的 HydroOJ
 
-6. 在首页菜单加入超链接至 `/paste/create`
+5. 在首页菜单加入超链接至 `/paste/create`
 
 ## 原仓库版权信息
 

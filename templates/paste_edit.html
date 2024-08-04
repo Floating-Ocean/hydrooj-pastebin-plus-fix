@@ -4,9 +4,6 @@
 <div class="row">
   <div class="medium-9 columns">
     <div class="section">
-      <div class="section__header">
-          <h1 class="section__title">{{ _("paste_edit") }}</h1>
-      </div>
       <div class="section__body">
         <form method="post">
           <div class="row">
@@ -29,11 +26,11 @@
                 <br>
                 {% if doc.isprivate == true %}
                   <label class="checkbox">
-                    <input type="checkbox" name="isprivate" value="on" class="checkbox" checked>私有
+                    <input type="checkbox" name="isprivate" value="on" class="checkbox" checked>{{ _("Private") }}
                   </label>
                 {% else %}
                   <label class="checkbox">
-                    <input type="checkbox" name="isprivate" value="on" class="checkbox">私有
+                    <input type="checkbox" name="isprivate" value="on" class="checkbox">{{ _("Private") }}
                   </label>
                 {% endif %}
               </label>
