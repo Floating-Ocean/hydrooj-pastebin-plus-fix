@@ -5,67 +5,67 @@
   <div class="medium-12 columns">
     <div class="section">
       <div class="section__header">
-          <h1 class="section__title">{{ doc.title }}</h1>
+        <h1 class="section__title">{{ doc.title }}</h1>
       </div>
       <div class="section__body">
-          <div class="row">
-            <div class="columns">
-              <font color="gray" size="2px">
-                {% if doc.isprivate == true %}
-                  <span class="icon icon-user"></span> {{ doc.user }}&emsp;{{ _("Private") }}&emsp;{{ doc.time }}
-                {% else %}
-                  <span class="icon icon-user"></span> {{ doc.user }}&emsp;{{ _("Public") }}&emsp;{{ doc.time }}
-                {% endif %}
-              </font>
-            </div>
-          </div>
-          <div class="row" style="padding-top: 32px;padding-bottom: 24px;">
-            <div class="columns">
-              <label>
-                {{ doc.content|markdown|safe }}
-              </label>
-            </div>
-          </div>
-          
-          <div style="padding:1.2rem 0 1.2rem;">
-              <h3>{{ _('Source code of this paste') }} <button onclick="toggleInfoView()" style="color:inherit;font-size:0.96rem!important;" id="view-info" status="collapse">{{ _('View') }}</button></h3>
-          </div>
-          <script>
-              function toggleInfoView(){
-                  var btn = jQuery.noConflict()("#view-info");
-                  var source = jQuery.noConflict()("#view-source");
-                  source.slideToggle();
-                  if(btn.attr('status') == "collapse"){
-                      btn.text("{{ _('Collapse') }}")
-                      btn.attr('status', "open")
-                  }else{
-                      btn.text("{{ _('View') }}")
-                      btn.attr('status', "collapse")
-                  }
-              }
-          </script>
-          
-          <div class="code-toolbar" id="view-source" style="display:none;"><pre class="syntax-hl language-markdown" tabindex="0"><code class="language-markdown" style="font-size:0.8em!important;">{{ doc.content | escape | safe }}</code></pre></div>
-          
-          <br>
-          <div class="row">
-            <div class="columns">
-              <input type="hidden" name="csrfToken" value="{{ handler.csrfToken }}">
-              <div style="margin-top:12px;user-select:none;"><font color="gray" size="0.96em">Powered by <a href="//github.com/liyanqwq/hydrooj-pastebin-plus">Hydro Pastebin Plus</a>, <a href="//github.com/Floating-Ocean/hydrooj-pastebin-plus-fix">modified by Floating Ocean</a></font></div>
-            </div>
+        <div class="row">
+          <div class="columns">
+            <font color="gray" size="2px">
+              {% if doc.isprivate == true %}
+                <span class="icon icon-user"></span> {{ doc.user }}&emsp;{{ _("Private") }}&emsp;{{ doc.time }}
+              {% else %}
+                <span class="icon icon-user"></span> {{ doc.user }}&emsp;{{ _("Public") }}&emsp;{{ doc.time }}
+              {% endif %}
+            </font>
           </div>
         </div>
-          {% if handler.user._id == doc.owner %}
-            <ul class="section__footer supplementary dot list">
-              <li><a href="{{ url('paste_manage') }}">
-                <span class="icon icon-copy"></span> {{ _('Manage my pastes') }}
-              </a></li>
-              <li><a href="{{ url('paste_edit', { id: doc._id }) }}">
-                <span class="icon icon-edit"></span> {{ _('Edit') }}
-              </a></li>
-            </ul>
-          {% endif %}
+        <div class="row" style="padding-top: 32px;padding-bottom: 24px;">
+          <div class="columns">
+            <label>
+              {{ doc.content|markdown|safe }}
+            </label>
+          </div>
+        </div>
+
+        <div style="padding:1.2rem 0 1.2rem;">
+            <h3>{{ _('Source code of this paste') }} <button onclick="toggleInfoView()" style="color:inherit;font-size:0.96rem!important;" id="view-info" status="collapse">{{ _('View') }}</button></h3>
+        </div>
+        <script>
+          function toggleInfoView(){
+            var btn = jQuery.noConflict()("#view-info");
+            var source = jQuery.noConflict()("#view-source");
+            source.slideToggle();
+            if(btn.attr('status') == "collapse"){
+              btn.text("{{ _('Collapse') }}")
+              btn.attr('status', "open")
+            }else{
+              btn.text("{{ _('View') }}")
+              btn.attr('status', "collapse")
+            }
+          }
+        </script>
+
+        <div class="code-toolbar" id="view-source" style="display:none;"><pre class="syntax-hl language-markdown" tabindex="0"><code class="language-markdown" style="font-size:0.8em!important;">{{ doc.content | escape | safe }}</code></pre></div>
+
+        <br>
+        <div class="row">
+          <div class="columns">
+            <input type="hidden" name="csrfToken" value="{{ handler.csrfToken }}">
+            <div style="margin-top:12px;user-select:none;"><font color="gray" size="0.96em">Powered by <a href="//github.com/liyanqwq/hydrooj-pastebin-plus">Hydro Pastebin Plus</a>, <a href="//github.com/Floating-Ocean/hydrooj-pastebin-plus-fix">modified by Floating Ocean</a></font></div>
+          </div>
+        </div>
       </div>
+      {% if handler.user._id == doc.owner %}
+        <ul class="section__footer supplementary dot list">
+          <li><a href="{{ url('paste_manage') }}">
+            <span class="icon icon-copy"></span> {{ _('Manage my pastes') }}
+          </a></li>
+          <li><a href="{{ url('paste_edit', { id: doc._id }) }}">
+            <span class="icon icon-edit"></span> {{ _('Edit') }}
+          </a></li>
+        </ul>
+      {% endif %}
+    </div>
   </div>
 </div>
 {% endblock %}

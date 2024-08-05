@@ -1,34 +1,48 @@
-import {Context, Handler, DocumentNotFoundError} from 'hydrooj' // 注册路由所用工具
-const { PRIV } = global.Hydro.model.builtin; // 内置 Privilege 权限节点
-const pastebin = global.Hydro.model.pastebin; // 刚刚编写的pastebin模型
+import {Handler, param, Types, RecordNotFoundError} from 'hydrooj' // 注册路由所用工具
 import {
     CreateError as Err, NotFoundError, ForbiddenError, ValidationError
 } from '@hydrooj/framework';
 
-export const AuthorMismatchError = Err('AuthorMismatchError', ForbiddenError, 'You are not the author of this paste.');
-export const PasteNotFoundError = Err('PasteNotFoundError', ForbiddenError, 'Paste {1} not found.');
+const record = global.Hydro.model.record;
+const user = global.Hydro.model.user;
+const { PRIV } = global.Hydro.model.builtin; // 内置 Privilege 权限节点
+const pastebin = global.Hydro.model.pastebin; // 刚刚编写的pastebin模型
+
+export const PasteAuthorMismatchError = Err('PasteAuthorMismatchError', ForbiddenError, 'You are not the author of this paste.');
+export const PasteNotFoundError = Err('PasteNotFoundError', NotFoundError, 'Paste {1} not found.');
+export const RecordAuthorMismatchError = Err('RecordAuthorMismatchError', ForbiddenError, 'You are not the author of this record.');
 
 
 class PasteCreateHandler extends Handler {
-    async get() {
+
+    @param('rid', Types.ObjectId, true)
+    async get(domainId, rid = -1) {
         this.response.template = 'paste_create.html';
+        this.response.body = {udoc: {}, rdoc: {_id: "-1"}};
+
+        if(rid === -1) return;
+
+        const rdoc = await record.get(domainId, rid);
+        if (!rdoc) throw new RecordNotFoundError(rid);
+        if (rdoc.uid !== this.user._id) throw new RecordAuthorMismatchError(rid);  // 防止本功能成为偷看代码的漏洞
+
+        let [udoc] = await Promise.all([
+            user.getById(domainId, rdoc.uid),
+        ]);
+
+        this.response.body.udoc = udoc;
+        this.response.body.rdoc = rdoc;
     }
 
     async post({
-        title , 
-        content , 
+        title, 
+        content, 
         isprivate,
     }) {
         if(content.length == 0){
-            throw new ValidationError('content')
+            throw new ValidationError('content');
         }
-        var p;
-        if(isprivate==="on"){
-            p=true;
-        }
-        else{
-            p=false;
-        }
+        const p = isprivate === "on" ? true : false;
         var pasteid = await pastebin.add(this.user._id, this.user.uname, title, content, p);
         // 将用户重定向到创建完成的url
         this.response.redirect = this.url('paste_show', { id: pasteid });
@@ -36,10 +50,11 @@ class PasteCreateHandler extends Handler {
 }
 
 class PasteEditHandler extends Handler {
+
     async get({ id }) {
         const doc = await pastebin.get(id);
         if(!doc) throw new PasteNotFoundError(id);
-        if(this.user._id!=doc.owner){
+        if(this.user._id != doc.owner){
             if(doc.isprivate) throw new PasteNotFoundError(id);
             else throw new AuthorMismatchError();
         }
@@ -48,31 +63,26 @@ class PasteEditHandler extends Handler {
     }
 
     async post({
-        pasteid ,
-        title , 
-        content , 
-        isprivate ,
+        pasteid,
+        title, 
+        content, 
+        isprivate,
     }) {
         if(content.length == 0){
-            throw new ValidationError('content')
+            throw new ValidationError('content');
         }
-        var p;
-        if(isprivate==="on"){
-            p=true;
-        }
-        else{
-            p=false;
-        }
+        const p = isprivate === "on" ? true : false;
         await pastebin.edit(pasteid,this.user._id, title, content, p);
         this.response.redirect = this.url('paste_show', { id: pasteid });
     }
 }
 
 class PasteDeleteHandler extends Handler {
+
     async get({ id }) {
         const doc = await pastebin.get(id);
         if(!doc) throw new PasteNotFoundError(id);
-        if(this.user._id!=doc.owner){
+        if(this.user._id != doc.owner){
             if(doc.isprivate) throw new PasteNotFoundError(id);
             else throw new AuthorMismatchError();
         }
@@ -81,7 +91,7 @@ class PasteDeleteHandler extends Handler {
     }
 
     async post({
-        pasteid ,
+        pasteid,
     }) {
         await pastebin.del(pasteid);
         this.response.redirect = this.url('paste_manage');
@@ -89,6 +99,7 @@ class PasteDeleteHandler extends Handler {
 }
 
 class PasteShowHandler extends Handler {
+
     async get({ id }) {
         const doc = await pastebin.get(id);
         if (!doc) throw new PasteNotFoundError(id);
@@ -101,6 +112,7 @@ class PasteShowHandler extends Handler {
 }
 
 class PasteManageHandler extends Handler {
+
     async get() {
         const doc = await pastebin.getUserPaste(this.user._id);
         this.response.body = { doc };
@@ -108,7 +120,7 @@ class PasteManageHandler extends Handler {
     }
 }
 
-export async function apply(ctx: Context) {
+export async function apply(ctx) {
     ctx.Route('paste_create', '/paste/create', PasteCreateHandler, PRIV.PRIV_USER_PROFILE);
     ctx.Route('paste_manage', '/paste/manage', PasteManageHandler, PRIV.PRIV_USER_PROFILE);
     ctx.Route('paste_show', '/paste/show/:id', PasteShowHandler, PRIV.PRIV_USER_PROFILE);

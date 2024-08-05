@@ -5,7 +5,7 @@
   <div class="medium-9 columns">
     <div class="section">
       <div class="section__header">
-          <h1 class="section__title">{{ _("paste_create") }}</h1>
+        <h1 class="section__title">{{ _("paste_create") }}</h1>
       </div>
       <div class="section__body">
         <form method="post">
@@ -13,7 +13,11 @@
             <div class="medium-10 columns">
               <label>
                 {{ _('Title') }}
-                <input name="title" placeholder="{{ _('title') }}" class="textbox" autofocus>
+                {% if rdoc['_id'] != -1 %}
+                  <input name="title" value="[{{ udoc['uname'] }}] {{ rdoc['_id'] }}" placeholder="{{ _('title') }}" class="textbox" autofocus>
+                {% else %}
+                  <input name="title" placeholder="{{ _('title') }}" class="textbox" autofocus>
+                {% endif %}
               </label>
             </div>
             <div class="medium-2 columns">
@@ -29,7 +33,13 @@
             <div class="medium-12 columns">
               <label>
                 {{ _('Content') }} ({{ _('required') }})
-                <textarea name="content" class="textbox" style="height: 500px" data-markdown></textarea>
+                <textarea name="content" class="textbox" style="height: 500px" data-markdown>
+{% if rdoc['_id'] != -1 %}
+```cpp
+{{ rdoc['code'] }}
+```
+{% endif %}
+                </textarea>
               </label>
             </div>
           </div>
