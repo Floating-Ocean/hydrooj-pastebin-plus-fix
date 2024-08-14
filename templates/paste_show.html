@@ -12,9 +12,9 @@
           <div class="columns">
             <font color="gray" size="2px">
               {% if doc.isprivate == true %}
-                <span class="icon icon-user"></span> {{ doc.user }}&emsp;{{ _("Private") }}&emsp;{{ doc.time }}
+                <span class="icon icon-user"></span> {{ doc.user }}&emsp;{{ _("Private") }}&emsp;{{ datetimeSpan(doc.date)|safe }}
               {% else %}
-                <span class="icon icon-user"></span> {{ doc.user }}&emsp;{{ _("Public") }}&emsp;{{ doc.time }}
+                <span class="icon icon-user"></span> {{ doc.user }}&emsp;{{ _("Public") }}&emsp;{{ datetimeSpan(doc.date)|safe }}
               {% endif %}
             </font>
           </div>
