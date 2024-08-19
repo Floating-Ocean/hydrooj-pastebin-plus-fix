@@ -23,7 +23,7 @@ function dateFormat(fmt, date) {
 
 function toUTC8Date(utc){
     const utcDate = new Date(utc + " UTC");
-    const utc8Date = new Date(utcDate.toLocaleString('en-GB', { timeZone: 'Asia/Shanghai', hour12: false }));
+    const utc8Date = new Date(utcDate.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false }));
     return utc8Date;
 }
 
@@ -64,16 +64,16 @@ async function get(pasteId) {
     if (result === undefined){
         return result;
     }
-    result.date = toUTC8Date(result.time);
-    result.time = dateFormat("YYYY-mm-dd HH:MM:SS", result.date);
+    result.date = new Date(result.time + " UTC");
+    result.time = dateFormat("YYYY-mm-dd HH:MM:SS", toUTC8Date(result.time));
     return result;
 }
 
 async function getUserPaste(userId) {
     var result = await coll.find({ "owner": Number.parseInt(userId) }).sort({ time: -1 }).toArray();
     result.forEach((item, index, array) => {
-        array[index].date = toUTC8Date(array[index].time);
-        array[index].time = dateFormat("YYYY-mm-dd HH:MM:SS", array[index].date);
+        array[index].date = new Date(result.time + " UTC");
+        array[index].time = dateFormat("YYYY-mm-dd HH:MM:SS", toUTC8Date(array[index].time));
     });
     return result;
 }

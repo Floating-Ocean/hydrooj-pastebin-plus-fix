@@ -20,7 +20,7 @@ class PasteCreateHandler extends Handler {
         this.response.template = 'paste_create.html';
         this.response.body = {udoc: {}, rdoc: {_id: "-1"}};
 
-        if(rid === -1) return;
+        if (rid === -1) return;
 
         const rdoc = await record.get(domainId, rid);
         if (!rdoc) throw new RecordNotFoundError(rid);
@@ -39,7 +39,7 @@ class PasteCreateHandler extends Handler {
         content, 
         isprivate,
     }) {
-        if(content.length == 0){
+        if (content.length == 0){
             throw new ValidationError('content');
         }
         const p = isprivate === "on" ? true : false;
@@ -53,10 +53,10 @@ class PasteEditHandler extends Handler {
 
     async get({ id }) {
         const doc = await pastebin.get(id);
-        if(!doc) throw new PasteNotFoundError(id);
-        if(this.user._id != doc.owner){
-            if(doc.isprivate) throw new PasteNotFoundError(id);
-            else throw new AuthorMismatchError();
+        if (!doc) throw new PasteNotFoundError(id);
+        if (this.user._id != doc.owner){
+            if (doc.isprivate) throw new PasteNotFoundError(id);
+            else throw new PasteAuthorMismatchError();
         }
         this.response.body = {doc};
         this.response.template = 'paste_edit.html';
@@ -68,7 +68,7 @@ class PasteEditHandler extends Handler {
         content, 
         isprivate,
     }) {
-        if(content.length == 0){
+        if (content.length == 0){
             throw new ValidationError('content');
         }
         const p = isprivate === "on" ? true : false;
@@ -81,10 +81,10 @@ class PasteDeleteHandler extends Handler {
 
     async get({ id }) {
         const doc = await pastebin.get(id);
-        if(!doc) throw new PasteNotFoundError(id);
-        if(this.user._id != doc.owner){
-            if(doc.isprivate) throw new PasteNotFoundError(id);
-            else throw new AuthorMismatchError();
+        if (!doc) throw new PasteNotFoundError(id);
+        if (this.user._id != doc.owner){
+            if (doc.isprivate) throw new PasteNotFoundError(id);
+            else throw new PasteAuthorMismatchError();
         }
         this.response.body = {doc};
         this.response.template = 'paste_delete.html';
@@ -103,8 +103,8 @@ class PasteShowHandler extends Handler {
     async get({ id }) {
         const doc = await pastebin.get(id);
         if (!doc) throw new PasteNotFoundError(id);
-        if(doc.isprivate){
-            if(this.user._id!=doc.owner)throw new PasteNotFoundError(id);
+        if (doc.isprivate){
+            if(!this.user || this.user._id != doc.owner) throw new PasteNotFoundError(id);
         }
         this.response.body = { doc };
         this.response.template = 'paste_show.html';
@@ -123,7 +123,7 @@ class PasteManageHandler extends Handler {
 export async function apply(ctx) {
     ctx.Route('paste_create', '/paste/create', PasteCreateHandler, PRIV.PRIV_USER_PROFILE);
     ctx.Route('paste_manage', '/paste/manage', PasteManageHandler, PRIV.PRIV_USER_PROFILE);
-    ctx.Route('paste_show', '/paste/show/:id', PasteShowHandler, PRIV.PRIV_USER_PROFILE);
+    ctx.Route('paste_show', '/paste/show/:id', PasteShowHandler);
     ctx.Route('paste_edit', '/paste/show/:id/edit', PasteEditHandler, PRIV.PRIV_USER_PROFILE);
     ctx.Route('paste_delete', '/paste/show/:id/delete', PasteDeleteHandler, PRIV.PRIV_USER_PROFILE);
 }

@@ -24,18 +24,15 @@
    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
    ```
 
-2. 执行如下命令
+2. Clone本项目，并执行
    
    ```bash
-   yarn global add hydrooj-pastebin-plus
-   hydrooj addon add hydrooj-pastebin-plus
+   hydrooj addon add <本项目的绝对路径>
    ```
 
-3. 进入 `hydrooj-pastebin-plus` 的安装目录，并使用本仓库的代码替换源代码
+3. 重启您的 HydroOJ
 
-4. 重启您的 HydroOJ
-
-5. 在首页菜单加入超链接至 `/paste/create`
+4. 在菜单中加入超链接至 `/paste/manage`
 
 ## 原仓库版权信息
 

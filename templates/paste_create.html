@@ -34,12 +34,13 @@
               <label>
                 {{ _('Content') }} ({{ _('required') }})
                 <textarea name="content" class="textbox" style="height: 500px" data-markdown>
-{% if rdoc['_id'] != -1 %}
 ```cpp
+{% if rdoc['_id'] != -1 %}
 {{ rdoc['code'] }}
-```
+{% else %}
+
 {% endif %}
-                </textarea>
+```</textarea>
               </label>
             </div>
           </div>

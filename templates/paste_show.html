@@ -11,10 +11,11 @@
         <div class="row">
           <div class="columns">
             <font color="gray" size="2px">
+              <a href="{{ url('user_detail', { uid: doc.owner }) }}" style="color:gray"><span class="icon icon-user"></span> {{ doc.user }}</a>
               {% if doc.isprivate == true %}
-                <span class="icon icon-user"></span> {{ doc.user }}&emsp;{{ _("Private") }}&emsp;{{ datetimeSpan(doc.date)|safe }}
+                &emsp;{{ _("Private") }}&emsp;{{ datetimeSpan(doc.date)|safe }}
               {% else %}
-                <span class="icon icon-user"></span> {{ doc.user }}&emsp;{{ _("Public") }}&emsp;{{ datetimeSpan(doc.date)|safe }}
+                &emsp;{{ _("Public") }}&emsp;{{ datetimeSpan(doc.date)|safe }}
               {% endif %}
             </font>
           </div>
