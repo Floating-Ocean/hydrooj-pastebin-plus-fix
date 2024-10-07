@@ -64,6 +64,9 @@
           <li><a href="{{ url('paste_edit', { id: doc._id }) }}">
             <span class="icon icon-edit"></span> {{ _('Edit') }}
           </a></li>
+          <li><a href="javascript:;" data-copylink="{{ url('paste_show', { id: doc._id }) }}">
+            <span class="icon icon-link"></span> {{ _('Share') }}
+          </a></li>
         </ul>
       {% endif %}
     </div>

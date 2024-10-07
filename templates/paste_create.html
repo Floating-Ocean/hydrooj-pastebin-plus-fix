@@ -34,13 +34,17 @@
               <label>
                 {{ _('Content') }} ({{ _('required') }})
                 <textarea name="content" class="textbox" style="height: 500px" data-markdown>
-```cpp
 {% if rdoc['_id'] != -1 %}
-{{ rdoc['code'] }}
-{% else %}
+{{ _('Code pasted from') }} [{{ url('record_detail', { rid: rdoc['_id'] }) }}]({{ url('record_detail', { rid: rdoc['_id'] }) }})
 
-{% endif %}
-```</textarea>
+```cpp
+{{ rdoc['code'] }}
+```
+{% else %}
+```cpp
+
+```
+{% endif %}</textarea>
               </label>
             </div>
           </div>
