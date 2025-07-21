@@ -1,4 +1,4 @@
-const { db } = global.Hydro.service; // 数据库连接
+import { db } from 'hydrooj'; // 数据库连接 [deprecated]
 const coll = db.collection('paste');
 
 function dateFormat(fmt, date) {
