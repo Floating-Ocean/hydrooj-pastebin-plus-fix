@@ -6,16 +6,16 @@
 
 针对 [`hydrooj-pastebin-plus`](https://github.com/liyanqwq/hydrooj-pastebin-plus) 的修复和完善。
 
-适配 Hydro 4.13.0 ~ 4.19.1
+适配 Hydro 5.0+
 
 > [!WARNING]
 > Hydro V5 开发接口进行了大更改，本项目将分成两个分支进行更新。
 
-[>> 前往 **Hydro-V5** 分支](https://github.com/Floating-Ocean/hydrooj-pastebin-plus-fix/tree/Hydro-V5)
+[>> 前往 **Hydro-V4** 分支](https://github.com/Floating-Ocean/hydrooj-pastebin-plus-fix/tree/Hydro-V4)
 
 ## 更改
 
-1. 更改部分接口的调用方式，使插件兼容 Hydro 4.13.0+；
+1. 更改部分接口的调用方式，使插件兼容 Hydro 5.0+；
 2. 更改所有按钮的链接，在点击按钮后不会切换域；
 3. 更改布局以及部分按钮的出现位置，使其较为符合 HydroOJ 的使用习惯；
 4. 更改字段为空的处理，以及权限问题抛出的异常；
@@ -23,16 +23,12 @@
 
 ## 使用说明
 
-1. 如果您的 HydroOJ 版本较低，请进入您的 HydroOJ 安装目录，在 `/packages/ui-default/templates/layout/html5.html` 中 `<head>` 标签结束前位置插入如下代码：
-   ```html
-   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-   ```
-2. Clone本项目，并执行：
+1. Clone本项目，并执行：
    ```bash
    hydrooj addon add <本项目的绝对路径>
    ```
-3. 重启您的 HydroOJ；
-4. 在菜单中加入超链接至 `/paste/manage`
+2. 重启您的 HydroOJ；
+3. 在菜单中加入超链接至 `/paste/manage`
 
 ## 原仓库版权信息
 
