@@ -1,10 +1,12 @@
 {
   "name": "hydrooj-pastebin-plus-fix",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Hydro pastebin module",
   "main": "index.js",
   "author": "Floating-Ocean",
   "license": "AGPL-3.0",
-  "peerDependencies": {
+  "peerDependencies": {},
+  "devDependencies": {
+    "hydrooj": "^5.0.0-beta.5"
   }
 }

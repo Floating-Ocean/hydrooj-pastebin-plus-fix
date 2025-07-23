@@ -10,7 +10,7 @@
             <div class="medium-12 columns">
               <label>
                 {{ _('PasteID') }}
-                <input name="pasteid" value="{{ doc._id }}" class="textbox" readonly>
+                <input name="pasteid" value="{{ ddoc._id }}" class="textbox" readonly>
               </label>
             </div>
           </div>
@@ -18,21 +18,19 @@
             <div class="medium-10 columns">
               <label>
                 {{ _('Title') }}
-                <input name="title" placeholder="{{ _('title') }}" value="{{ doc.title }}" class="textbox" autofocus>
+                <input name="title" placeholder="{{ _('title') }}" value="{{ ddoc.title }}" class="textbox" autofocus>
               </label>
             </div>
             <div class="medium-2 columns">
               <label>
                 <br>
-                {% if doc.isprivate == true %}
                   <label class="checkbox">
-                    <input type="checkbox" name="isprivate" value="on" class="checkbox" checked>{{ _("Private") }}
+                    {% if ddoc.isprivate == true %}
+                      <input type="checkbox" name="isprivate" class="checkbox" checked>{{ _("Private") }}
+                    {% else %}
+                      <input type="checkbox" name="isprivate" class="checkbox">{{ _("Private") }}
+                    {% endif %}
                   </label>
-                {% else %}
-                  <label class="checkbox">
-                    <input type="checkbox" name="isprivate" value="on" class="checkbox">{{ _("Private") }}
-                  </label>
-                {% endif %}
               </label>
             </div>
           </div>
@@ -40,7 +38,7 @@
             <div class="medium-12 columns">
               <label>
                 {{ _('Content') }} ({{ _('required') }})
-                <textarea name="content" class="textbox" style="height: 500px" data-markdown>{{ doc.content }}</textarea>
+                <textarea name="content" class="textbox" style="height: 500px" data-markdown>{{ ddoc.content }}</textarea>
               </label>
             </div>
           </div>
@@ -50,7 +48,7 @@
               <button type="submit" class="rounded primary button">
                 {{ _('Update') }}
               </button>
-              <a type="button" class="rounded button" href="{{ url('paste_delete', { id: doc._id }) }}">
+              <a type="button" class="rounded button" href="{{ url('paste_delete', { id: ddoc._id }) }}">
                 {{ _('Delete') }}
               </a>
               <button type="button" class="rounded button" onclick="window.history.go(-1)">

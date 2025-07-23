@@ -12,14 +12,14 @@
           <div class="row">
             <div class="medium-12 columns">
               <label>
-                <input type="hidden" name="pasteid" value="{{ doc._id }}" class="textbox" readonly>
+                <input type="hidden" name="pasteid" value="{{ ddoc._id }}" class="textbox" readonly>
               </label>
-              {%- if doc.title.length == 0 -%}
+              {%- if ddoc.title.length == 0 -%}
                 <div style="padding-top:16px">{{ _("No Title") }}</div>
               {%- else -%}
-                <div style="padding-top:16px">{{ _('Title') }}: {{ doc.title }}</div>
+                <div style="padding-top:16px">{{ _('Title') }}: {{ ddoc.title }}</div>
               {%- endif -%}
-              <div style="padding-top:12px">{{ _('PasteID') }}: {{ doc._id }}</div>
+              <div style="padding-top:12px">{{ _('PasteID') }}: {{ ddoc._id }}</div>
             </div>
           </div>
           <br>

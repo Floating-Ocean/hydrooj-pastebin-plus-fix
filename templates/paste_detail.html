@@ -1,21 +1,22 @@
-{% set page_name = "paste_show" %}
+{% set page_name = "paste_detail" %}
 {% extends "layout/basic.html" %}
 {% block content %}
 <div class="row">
   <div class="medium-12 columns">
     <div class="section">
       <div class="section__header">
-        <h1 class="section__title">{{ doc.title }}</h1>
+        <h1 class="section__title">{{ ddoc.title }}</h1>
       </div>
       <div class="section__body">
         <div class="row">
           <div class="columns">
             <font color="gray" size="2px">
-              <a href="{{ url('user_detail', { uid: doc.owner }) }}" style="color:gray"><span class="icon icon-user"></span> {{ doc.user }}</a>
-              {% if doc.isprivate == true %}
-                &emsp;{{ _("Private") }}&emsp;{{ datetimeSpan(doc.date)|safe }}
+              {{ user.render_inline(udict[ddoc.owner]) }}
+              @
+              {% if ddoc.isprivate == true %}
+                {{ datetimeSpan(ddoc.updateAt)|safe }}&emsp;{{ _("Private") }}
               {% else %}
-                &emsp;{{ _("Public") }}&emsp;{{ datetimeSpan(doc.date)|safe }}
+                {{ datetimeSpan(ddoc.updateAt)|safe }}&emsp;{{ _("Public") }}
               {% endif %}
             </font>
           </div>
@@ -23,7 +24,7 @@
         <div class="row" style="padding-top: 32px;padding-bottom: 24px;">
           <div class="columns">
             <label>
-              {{ doc.content|markdown|safe }}
+              {{ ddoc.content|markdown|safe }}
             </label>
           </div>
         </div>
@@ -46,7 +47,7 @@
           }
         </script>
 
-        <div class="code-toolbar" id="view-source" style="display:none;"><pre class="syntax-hl language-markdown" tabindex="0"><code class="language-markdown" style="font-size:0.8em!important;">{{ doc.content | escape | safe }}</code></pre></div>
+        <div class="code-toolbar" id="view-source" style="display:none;"><pre class="syntax-hl language-markdown" tabindex="0"><code class="language-markdown" style="font-size:0.8em!important;">{{ ddoc.content | escape | safe }}</code></pre></div>
 
         <br>
         <div class="row">
@@ -56,15 +57,15 @@
           </div>
         </div>
       </div>
-      {% if handler.user._id == doc.owner %}
+      {% if handler.user._id == ddoc.owner %}
         <ul class="section__footer supplementary dot list">
           <li><a href="{{ url('paste_manage') }}">
             <span class="icon icon-copy"></span> {{ _('Manage my pastes') }}
           </a></li>
-          <li><a href="{{ url('paste_edit', { id: doc._id }) }}">
+          <li><a href="{{ url('paste_edit', { id: ddoc._id }) }}">
             <span class="icon icon-edit"></span> {{ _('Edit') }}
           </a></li>
-          <li><a href="javascript:;" data-copylink="{{ url('paste_show', { id: doc._id }) }}">
+          <li><a href="javascript:;" data-copylink="{{ url('paste_detail', { id: ddoc._id }) }}">
             <span class="icon icon-link"></span> {{ _('Share') }}
           </a></li>
         </ul>

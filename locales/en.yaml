@@ -1,7 +1,7 @@
 pastebin: pastebin
 paste_create: Create paste
 paste_manage: Paste Manage
-paste_show: Paste Detail
+paste_detail: Paste Detail
 paste_edit: Paste Edit
 paste_delete: Paste Delete
 Provide pastebin service.: Provide pastebin service.

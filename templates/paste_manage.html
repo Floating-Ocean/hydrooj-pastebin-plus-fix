@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="section__body">
-        {% if doc.length > 0 %}
+        {% if ddoc.length > 0 %}
           <div class="row" style="padding-bottom: 24px;user-select:none;">
             <table class="data-table">
               <colgroup>
@@ -24,21 +24,21 @@
               <thead>
                 <tr>
                   <th class="col--title">{{ _('Title') }}</th>
-                  <th class="col--time">{{ _('Creation Time') }} (UTC+8)</th>
+                  <th class="col--time">{{ _('Creation Time') }}</th>
                   <th class="col--operation">{{ _('Operations') }}</th>
                 </tr>
               </thead>
               <tbody>
-                {%- for pdoc in doc -%}
+                {%- for pdoc in ddoc -%}
                   <tr>
                     {%- if pdoc.title.length == 0 -%}
-                      <td class="col--title" style="padding-left:1.125rem;"><a href="{{ url('paste_show', { id: pdoc._id }) }}" style="color:inherit;">({{ _("No Title") }})</a></td>
+                      <td class="col--title" style="padding-left:1.125rem;"><a href="{{ url('paste_detail', { id: pdoc._id }) }}" style="color:inherit;">({{ _("No Title") }})</a></td>
                     {%- else -%}
-                      <td class="col--title" style="padding-left:1.125rem;"><a href="{{ url('paste_show', { id: pdoc._id }) }}" style="color:inherit;">{{pdoc.title}}</a></td>
+                      <td class="col--title" style="padding-left:1.125rem;"><a href="{{ url('paste_detail', { id: pdoc._id }) }}" style="color:inherit;">{{pdoc.title}}</a></td>
                     {%- endif -%}
-                      <td class="col--time">{{pdoc.time}}</td>
+                      <td class="col--time">{{ datetimeSpan(pdoc.updateAt, false, 'YYYY-MM-DD HH:mm:ss')|safe }}</td>
                     <td class="col--operation">
-                      <a href="{{ url('paste_show', { id: pdoc._id }) }}">{{ _("View") }}</a>&nbsp;&nbsp;
+                      <a href="{{ url('paste_detail', { id: pdoc._id }) }}">{{ _("View") }}</a>&nbsp;&nbsp;
                       <a href="{{ url('paste_edit', { id: pdoc._id }) }}">{{ _("Edit") }}</a>&nbsp;&nbsp;
                       <a href="{{ url('paste_delete', { id: pdoc._id }) }}">{{ _("Delete") }}</a>
                     </td>

@@ -1,7 +1,7 @@
 pastebin: 클라우드 클립보드
 paste_create: 새 클립보드 생성
 paste_manage: 클립보드 관리
-paste_show: 클립보드 보기
+paste_detail: 클립보드 보기
 paste_edit: 클립보드 편집
 paste_delete: 클립보드 삭제
 Provide pastebin service.: 클라우드 클립보드 서비스를 제공합니다.
