@@ -21,14 +21,17 @@
 4. 更改字段为空的处理，以及权限问题抛出的异常；
 5. 为 `/paste/create` 添加 `rid` 参数，支持从指定 `rid` 的提交记录中导入代码
 
-## 使用说明
+## 启用插件
 
-1. Clone本项目，并执行：
-   ```bash
-   hydrooj addon add <本项目的绝对路径>
-   ```
-2. 重启您的 HydroOJ；
-3. 在菜单中加入超链接至 `/paste/manage`
+> [!WARNING]
+> 插件修改了 `record_detail.html` 以实现从提交记录创建剪贴板的功能，如更新后遇前端错误，请自行解决或停用本插件
+
+```bash
+cd /root/.hydro/
+git clone https://github.com/Floating-Ocean/hydrooj-pastebin-plus-fix
+hydrooj addon add /root/.hydro/hydrooj-pastebin-plus-fix
+pm2 restart hydrooj
+```
 
 ## 原仓库版权信息
 

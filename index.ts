@@ -122,4 +122,63 @@ export async function apply(ctx: Context) {
     ctx.Route('paste_detail', '/paste/detail/:id', PasteDetailHandler);
     ctx.Route('paste_edit', '/paste/detail/:id/edit', PasteEditHandler, PRIV.PRIV_USER_PROFILE);
     ctx.Route('paste_delete', '/paste/detail/:id/delete', PasteDeleteHandler, PRIV.PRIV_USER_PROFILE);
+    ctx.injectUI('UserDropdown', 'paste_manage', () => ({ icon: 'code', displayName: 'My Pastes' }));
+    ctx.i18n.load('zh', {
+        'pastebin': '云剪贴板',
+        'paste_create': '创建新剪贴板',
+        'paste_manage': '管理剪贴板',
+        'paste_detail': '查看剪贴板',
+        'paste_edit': '编辑剪贴板',
+        'paste_delete': '删除剪贴板',
+        'Provide pastebin service.': '提供云剪贴板服务。',
+        'Application': '应用',
+        'Private': '私密',
+        'Content': '内容',
+        'Create': '创建',
+        'Collapse': '收起',
+        'Update': '更新',
+        'PasteID': '剪贴板ID',
+        'Delete': '删除',
+        'Manage': '管理',
+        'Creation Time': '创建时间',
+        'Operations': '操作',
+        'Manage my pastes': '管理我的剪贴板',
+        'Click the button below to delete the paste. This action is irreversible, please proceed with caution.': '点击下方按钮即可删除剪贴板。操作不可逆，请谨慎操作。',
+        'My Pastes': '我的剪贴板',
+        'No Title': '无标题',
+        'Source code of this paste': '剪贴板的原始内容',
+        'Share by Paste': '使用云剪贴板分享',
+        'Well, it doesn\'t seem like you have paste anything here.': '唔，看起来你好像并没有在这里粘贴过任何东西捏 (。・ω・。)',
+        'Code pasted from': '代码粘贴自',
+        'Link copied to clipboard!': '链接已复制到剪贴板！'
+    });
+    ctx.i18n.load('en', {
+        'pastebin': 'pastebin',
+        'paste_create': 'Create paste',
+        'paste_manage': 'Paste Manage',
+        'paste_detail': 'Paste Detail',
+        'paste_edit': 'Paste Edit',
+        'paste_delete': 'Paste Delete',
+        'Provide pastebin service.': 'Provide pastebin service.',
+        'Application': 'Application',
+        'Private': 'Private',
+        'Content': 'Content',
+        'Create': 'Create',
+        'Collapse': 'Collapse',
+        'Update': 'Update',
+        'PasteID': 'PasteID',
+        'Delete': 'Delete',
+        'Manage': 'Manage',
+        'Creation Time': 'Creation Time',
+        'Operations': 'Operations',
+        'Manage my pastes': 'Manage my pastes',
+        'Click the button below to delete the paste. This action is irreversible, please proceed with caution.': 'Click the button below to delete the paste. This action is irreversible, please proceed with caution.',
+        'My pastes': 'My pastes',
+        'No Title': 'No Title',
+        'Source code of this paste': 'Source code of this paste',
+        'Share by Paste': 'Share by Paste',
+        'Well, it doesn\'t seem like you have paste anything here.': 'Well, it doesn\'t seem like you have paste anything here.',
+        'Code pasted from': 'Code pasted from',
+        'Link copied to clipboard!': 'Link copied to clipboard!'
+    });
 }
