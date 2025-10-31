@@ -39,5 +39,3 @@
 本项目在 `hydrooj_pastebin` 基础上开发
 
 非商业使用遵 AGPL v3 协议
-
-商业使用联系 [liyanqwq@duianit.cn](mailto:liyanqwq@duianit.cn)
